@@ -1,0 +1,71 @@
+# Docker CLI commands
+
+## Commands to manage version related info
+- display system information 
+```docker info``` 
+
+- display the docker's system version
+`docker version`
+
+- Login to docker Registry
+`docker login` 
+
+
+## Commands to manage Containers
+
+- pull an image from Registry
+`docker pull [imageName]`
+
+- run containers
+`docker run [imageName]`
+
+- to run docker image in detached mode
+`docker run -d [imageName]`
+
+- start stopped containersl
+`docker start [containerName]`
+
+- list running containers
+`docker ps`
+
+- list running and stopped containers
+`docker ps -a`
+
+- stop containers
+`docker stop [containerName]`
+
+- kill containers
+`docker kill [containerName]`
+
+- get image info
+`docker image inspect [imageName]`
+
+
+## Commands to set limits
+- To set limits for containers 
+`docker run --memory="256m" nginx` and
+`docker run --cpus=".5" nginx`
+
+
+## Commands to attach shells to containers
+we can attach and CLI tool to container and execute commands inside the container
+
+- `docker run -it nginx /bin/bash` -> Attach shell
+- `docker runt -it microsoft/powershell:nanserver pwsh.execute` -> Attach powershell
+- `docker container exec -it [containername] -- bash` -> Attach to a running container
+
+## Commands to Cleaning up the containers/images
+- removes stopped containers
+`docker rm [containerName]`
+
+- removes all stopped containers
+`docer rm $(docker ps -a -q)`
+
+- list images
+` docker images`
+
+- Delete images
+`docker rmi [imageNames]`
+
+- Remove all images not in use by any containers
+`docker system prune -a`
