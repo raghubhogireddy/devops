@@ -1,6 +1,15 @@
 # Containers
+- A self-contained sealed unit of software, which contains everything required to run the code and even operating system.
 - A unit of software deployment. It contains source code, runtime, system tools and some dependennt librabries.
 - Containers are made of multiple layers, Base OS(Windows or linux), few customizations and your application
+
+## A Container can includes
+- code
+- configs
+- processes
+- networking
+- dependecies
+- operating system 
 
 # why to use Containers
  - Move faster by deploying smaller units
