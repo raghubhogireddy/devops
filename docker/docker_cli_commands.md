@@ -100,6 +100,61 @@ Tag and existing image
 >`docker tag [imageName] [name:tag]`
 
 
+## Doker flow
+
+Docker Image -- docker run --> Running container --> Stopped COntainer -- docker commit --> New Image
+
+## How to convert docker containers into docker images
+>`docker commit [container_id] (or) [container_name] [image_name`
+
+explictly you can tag the name for the image that you created with docker container
+>`docker tag [image_id] [image_name] `
+
+### Running process in containers
+
+if you want a container up and running from a image and should get delete once stops 
+>`docker run --rm -ti [image_name] [process to start]`
+
+Ex; >`docker run --rm -ti my_nginx_image bash -c "sleep 3; echo all done`
+
+if you want to run a container and leaves it running in the background -- kind of detached
+>`docker run -d -ti my_nginx_image bash`
+
+and now if you want to attach the container 
+>`docker attach [container_id]`
+
+you cannot simply type exit inside bash, because it will stop running container and exits you. 
+If you want container still in running mode and detach from that just type `Ctrl+P & Ctrl+Q`
+
+### Managing Containers
+
+if you want to see logs of the containers
+
+>`docker run --name [container_name] -d -ti [image_name] process`
+
+Ex; >`docker run --name nginx_cont -d -ti my_nginx_image bash -c "lose etc/passowrd" `
+
+if you want to see logs of the container
+
+>`docker logs [container_name]`
+
+resource contraints
+>`docker run --memory maximum-allowed-memory [image_name]`
+
+to know CPU shares and quota
+
+>`docker run --cpu-shares`
+
+>`docker run --cpu-quota`
+
+#### Remmber below things while dealing with containers
+- don't let your containers fetch dependencies when containers start
+- don't leave important things in unnamed stopped containers
+
+to kill the container
+>`docker kill [container_name]`
+
+>`docker rm [container_name`
 
 
 # In Nutshell
