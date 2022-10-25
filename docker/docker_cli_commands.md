@@ -1,6 +1,6 @@
 # Docker CLI commands
 
-## Commands to manage version related info
+### Commands to manage version related info
 ***
 display system information 
 > `docker info`
@@ -12,7 +12,7 @@ Login to docker Registry
 > `docker login`
 
 
-## Commands to manage Containers
+### Commands to manage Containers
 ***
 pull an image from Registry
 > `docker pull [imageName]`
@@ -51,14 +51,14 @@ was the port which container was listening to.
 > `-d` is a detached mode, when docker runs it start the container and return us the command line. 
 
 
-## Commands to set limits
+### Commands to set limits
 ***
 To set limits for containers 
 >`docker run --memory="256m" nginx` and
 `docker run --cpus=".5" nginx`
 
 
-## Commands to attach shells to containers
+### Commands to attach shells to containers
 ***
 we can attach and CLI tool to container and execute commands inside the container
 
@@ -71,7 +71,7 @@ we can attach and CLI tool to container and execute commands inside the containe
 
 >`docker container exec -it [containername] -- bash` -> Attach to a running container
 
-## Commands to Cleaning up the containers/images
+### Commands to Cleaning up the containers/images
 ***
 removes stopped containers
 > `docker rm [containerName]`
@@ -88,7 +88,7 @@ delete images
 remove all images not in use by any containers
 > `docker system prune -a`
 
-## Commands to build docker images using Dockerfile
+### Commands to build docker images using Dockerfile
 ***
 Builds an image using Dockerfile located in same folder.
 > `docker build -t [name:tag] .`
@@ -100,17 +100,19 @@ Tag and existing image
 >`docker tag [imageName] [name:tag]`
 
 
-## Doker flow
+### Doker flow
+***
 
 Docker Image -- docker run --> Running container --> Stopped COntainer -- docker commit --> New Image
 
-## How to convert docker containers into docker images
+### How to convert docker containers into docker images
 >`docker commit [container_id] (or) [container_name] [image_name`
 
 explictly you can tag the name for the image that you created with docker container
 >`docker tag [image_id] [image_name] `
 
 ### Running process in containers
+----
 
 if you want a container up and running from a image and should get delete once stops 
 >`docker run --rm -ti [image_name] [process to start]`
@@ -127,6 +129,7 @@ you cannot simply type exit inside bash, because it will stop running container 
 If you want container still in running mode and detach from that just type `Ctrl+P & Ctrl+Q`
 
 ### Managing Containers
+---
 
 if you want to see logs of the containers
 
@@ -155,6 +158,10 @@ to kill the container
 >`docker kill [container_name]`
 
 >`docker rm [container_name`
+
+### Exposing Ports
+
+-
 
 
 # In Nutshell
