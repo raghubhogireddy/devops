@@ -220,6 +220,47 @@ to kill the container
 >To run a container with specified network 
 >
 >`docker run --rm -ti --net [network_name] --name [container_name] ubuntu:14.04 bash`
+
+### Volumes
+***
+- volumes a sort of like shared-folders or vitrual-discs to store and share data.
+- Two main varities
+  - Persistant : you can put data there, it will saved on host. If containers goes away, data still exist
+  - Ephemeral : They exist as long as containers using it. If no container using it, they evoporate.
+- Volumes are not part of images
+#### Sharing Data with Host
+- 'Shared folders' with the host
+- Sharing a file into the container
+
+> `mkdir [folder]`
+> 
+>`docker run -ti -v [path to shared folder]:/[folder to appear in container] ubuntu bash`
+
+- same thing it goes for sharing a files as well
+
+#### Sharing Data between containers
+- we use `volumes-from`
+- Shared 'discs' that exist only as long as they are being used
+- Can be shared between containers
+
+>`docker run -ti -v /[shared folder] --name container_1 ubuntu bash`
+>
+> please not this folder is not being shared with host and since it's shared between containers alone, it will get evoporate once containers stops using it.
+
+>We are referring to volume created by container
+>`docker run -ti --volumes-from [container_name] --name container_2 ubuntu bash`
+
+### Docker Registries
+***
+- Registries that manage and Distribute images
+- Docker(the company) offers these for free
+- you can run your own as well\
+- Finding images from the Hub/Registry
+  - `docker search [image_name]` - search for particular image
+  - `docker pull [image_name]` - pulls the image from the Hub
+  - `docker tag [image_name]:[tag] [profile_name]/[image_name]:[tag]` - you can tag the image as if it's your own and it creates one with the details you specified.
+  - `docker push [profile_name]/[image_name]:[tag]` - to push your docker image to the hub. 
+
 # In Nutshell
 
 ### Dockerfile
