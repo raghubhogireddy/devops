@@ -73,19 +73,38 @@ we can attach and CLI tool to container and execute commands inside the containe
 
 ### Commands to Cleaning up the containers/images
 ***
-removes stopped containers
+>removes stopped containers
+>
 > `docker rm [containerName]`
 
-removes all stopped containers
+>removes all stopped containers
+>
 > `docer rm $(docker ps -a -q)`
 
-list images
+>list images
+>
 > ` docker images`
 
-delete images
-> `docker rmi [imageNames]`
+>`docker commit` tags images for you.
+>
+>This is example of the name structure
+>
+>`registry.example.com:port/organization/image-name:version-tag`
 
-remove all images not in use by any containers
+>convert docker containers into docker images
+>
+>`docker commit [container_id] (or) [container_name] [image_name]:[Tag]`
+
+>explictly you can tag the name for the image that you created with docker container
+>
+>`docker tag [image_id] [image_name]`
+
+>delete images
+>
+> `docker rmi [imageName] (or) docker rmi [image_id]`
+
+>remove all images not in use by any containers
+>
 > `docker system prune -a`
 
 ### Commands to build docker images using Dockerfile
@@ -104,12 +123,6 @@ Tag and existing image
 ***
 
 Docker Image -- docker run --> Running container --> Stopped COntainer -- docker commit --> New Image
-
-### How to convert docker containers into docker images
->`docker commit [container_id] (or) [container_name] [image_name`
-
-explictly you can tag the name for the image that you created with docker container
->`docker tag [image_id] [image_name] `
 
 ### Running process in containers
 ----
@@ -160,10 +173,53 @@ to kill the container
 >`docker rm [container_name`
 
 ### Exposing Ports
+***
+- Programs in containers are isolated from the iternet by default.
+- We can group your containers into "private" networks
+- Expose ports to let connections in
+- Private networks to connect between containers
+- Explicitly speccifies the port inside the contauner and outside
+- Exposes as many ports as you want
+- Requires coordination between contaiiners
+- Makes it easy to find the exposed ports
+> below command states to run a ubuntu which listens on two different ports 45678 & 45679 and opens a terminal interactive bash and conatiner will get removed once exited
+>  
+> `docker run --rm -ti -p 45678:45678 -p 45679:45679 --name echo-server ubuntu:14.04 bash`
 
--
+- We do have a special variable if we want to specify host Ip inside a container by `host.docker.internal`
+- The port inside the container is fixed.
+- The ports on the host is chosen from the unused ports
+- This allows many containers running programs with fixed ports 
+- This often is used with service discovery program
+> We have option to chose outside port dynamically for that you can remove `port:` 
+> 
+> To check dynamic external port we can use `docker port [container_name]`
+> 
+>`docker run --rm -ti -p 45678 -p 45679 --name echo-server ubuntu:14.04 bash`
 
+- We can chose protocol for the container as well. 
+>`docker run -p outside:inside/protocol(tcp/udp)`
 
+### Container Networking
+***
+- We can see the list Networks by 
+>`docker network ls`  
+- you ccould see three types of Network Dirvers
+  - bridge - N/w used by containers that don't specify a prefernce to be put into any other network.
+  - host - when you don't want container to have N/w isolation at all.
+  - none - This is in place, when there is no networking for the containers.
+  
+>To create a new network
+>
+> `docker network create [network_name]`
+> 
+>To add containers to the network
+>
+>`docker network connect [network_name] [container_name]`
+>
+>To run a container with specified network 
+>
+>`docker run --rm -ti --net [network_name] --name [container_name] ubuntu:14.04 bash`
 # In Nutshell
 
 ### Dockerfile
