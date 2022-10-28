@@ -1,2 +1,3 @@
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
+FROM busybox
+RUN echo "building simple docker image."
+CMD echo "hello container!!"
